@@ -1,6 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../Header/Header.css";
+import { Link } from 'react-router-dom';
 
 const Links = ({ path, classStyle, title, onClick }) => {
   return (

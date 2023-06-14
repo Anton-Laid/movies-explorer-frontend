@@ -1,84 +1,9 @@
 .portfolio {
-  width: 100vw;
-  margin-top: 140px;
+  width: 90.6vw;
+  margin: 0 auto 150px;
 }
 
-.portfolio__block-about-me {
-  display: grid;
-  grid-template-columns: 91vw;
-  grid-template-areas: repeat(5, 1fr);
-  width: 91vw;
-  margin: 0 auto;
-}
-
-.portfolio__title {
-  font-size: 18px;
-  font-weight: 100;
-  line-height: 22px;
-  letter-spacing: -0.04em;
-  text-align: left;
-  padding-bottom: 28px;
-  border-bottom: 1px solid #000;
-  width: 91vw;
-  margin: 0 auto 60px;
-}
-
-.portfolio__avatar {
-  width: 100%;
-  height: 352px;
-  border-radius: 10px;
-  margin-left: 20px;
-  background-image: url(../../images/avatar.jpeg);
-  background-size: cover;
-  margin: 0 auto 40px;
-}
-
-.portfolio__name {
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 36px;
-  letter-spacing: -0.04em;
-  text-align: left;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.portfolio__profession {
-  width: 100%;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin: 20px auto;
-}
-.portfolio__about-me {
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin: 0 auto 40px;
-  width: 100%;
-}
-
-.portfolio__github {
-  display: block;
-  width: 100%;
-  margin: 0 auto 70px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17px;
-  letter-spacing: 0em;
-  text-align: left;
-  text-decoration: none;
-  color: #000;
-}
-
-.portfolio__github:hover {
-  opacity: 0.7;
-}
-.portfolio__portfolio {
+.portfolio__title-portfolio {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -88,10 +13,11 @@
   width: 91vw;
   margin: 0 auto 40px;
 }
-.portfolio__project {
+
+.portfolio__link-project {
+  width: 1;
   position: relative;
   display: block;
-  width: 91vw;
   margin: 20px auto 0;
   font-size: 18px;
   font-weight: 400;
@@ -103,7 +29,8 @@
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 19px;
 }
-.portfolio__project:hover {
+
+.portfolio__link-project:hover {
   opacity: 0.7;
 }
 
@@ -113,74 +40,27 @@
   height: 11px;
   background-size: cover;
   position: absolute;
-  top: 5px;
-  right: 2px;
+  top: 7px;
+  right: 12px;
 }
 
-.portfolio__project-border-not {
-  padding-bottom: 70px;
+.portfolio__link-project_border-not {
   border: none;
+  padding-bottom: 0;
+}
+
+.portfolio__container-links {
+  width: 100%;
+  padding: 0;
 }
 
 @media (min-width: 750px) {
   .portfolio {
-    margin-top: 86px;
-    margin-bottom: 150px;
+    width: 86.9vw;
+    margin: 0 auto 180px;
   }
 
-  .portfolio__block-about-me {
-    width: 87vw;
-    margin: 0 auto;
-    grid-template-columns: repeat(2, 48vw 24vw);
-  }
-
-  .portfolio__title {
-    width: 87vw;
-    font-size: 22px;
-    line-height: 27px;
-    padding-bottom: 23px;
-  }
-
-  .portfolio__name {
-    grid-column: 1/2;
-    grid-row: 1/2;
-    font-size: 40px;
-    line-height: 40px;
-    margin-bottom: 16px;
-  }
-
-  .portfolio__profession {
-    font-size: 12px;
-    line-height: 18px;
-    grid-column: 1/2;
-    grid-row: 2/3;
-    margin: 0 auto 20px;
-  }
-
-  .portfolio__about-me {
-    grid-column: 1/2;
-    grid-row: 3/4;
-    font-size: 12px;
-    line-height: 18px;
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  .portfolio__github {
-    grid-column: 1/2;
-    grid-row: 4/5;
-    margin-top: 87px;
-  }
-
-  .portfolio__avatar {
-    grid-column: 2/3;
-    grid-row: 1/5;
-    margin-left: 49px;
-    width: 33vw;
-    height: 307px;
-  }
-
-  .portfolio__portfolio {
+  .portfolio__title-portfolio {
     line-height: 20px;
     margin: 22px auto 50px;
     width: 87vw;
@@ -188,7 +68,7 @@
     line-height: 20px;
   }
 
-  .portfolio__project {
+  .portfolio__link-project {
     width: 87vw;
     font-size: 28px;
     line-height: 50px;
@@ -202,64 +82,30 @@
     right: 5px;
   }
 
-  .portfolio__project-border-not {
-    margin-bottom: 90px;
+  .portfolio__link-project_border-not {
+    padding-bottom: 0;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1250px) {
   .portfolio {
-    margin-bottom: 125px;
+    width: 1140px;
+    margin-bottom: 144px;
   }
 
-  .portfolio__title {
-    line-height: 26px;
-    width: 89vw;
-    margin-top: 110px;
-    margin-bottom: 70px;
-  }
-
-  .portfolio__block-about-me {
-    width: 89vw;
-    grid-template-columns: repeat(2, 47vw 24vw);
-  }
-
-  .portfolio__name {
-    font-size: 50px;
-    line-height: 58px;
-    margin-bottom: 0;
-  }
-
-  .portfolio__profession {
+  .portfolio__title-portfolio {
     font-size: 18px;
     line-height: 20px;
-    margin: 18px auto 26px;
-  }
-
-  .portfolio__about-me {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  .portfolio__avatar {
-    margin-left: 270px;
-    width: 21vw;
-    height: 327px;
-  }
-
-  .portfolio__portfolio {
-    font-size: 18px;
-    line-height: 20px;
-    width: 89vw;
+    width: 100%;
     margin: 28px auto 50px;
   }
 
-  .portfolio__github {
+  .portfolio__link-github {
     margin-top: 99px;
   }
 
-  .portfolio__project {
-    width: 89vw;
+  .portfolio__link-project {
+    width: 100%;
     font-size: 30px;
     line-height: 50px;
   }

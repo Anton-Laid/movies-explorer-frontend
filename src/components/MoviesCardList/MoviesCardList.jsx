@@ -1,11 +1,11 @@
-import "./MoviesCardList.css";
-import { moviesData } from "../../utils/constans";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import './MoviesCardList.css';
+import { moviesData } from '../../utils/constans';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 const MoviesCardList = ({ meMovies }) => {
   return (
-    <>
-      <div className="movies-card-list">
+    <section className="movies-card-list">
+      <div className="movies-card-list__container">
         {moviesData.map((i) => {
           return (
             <MoviesCard
@@ -20,7 +20,7 @@ const MoviesCardList = ({ meMovies }) => {
         })}
       </div>
       <button className="movies-card-list__btn">Ещё</button>
-    </>
+    </section>
   );
 };
 

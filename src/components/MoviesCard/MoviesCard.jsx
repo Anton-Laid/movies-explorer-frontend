@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import "./MoviesCard.css";
-import meMovie from "../../images/savemovie.svg";
-import deleteMovies from "../../images/deletemovies.svg";
-import saveMovie from "../../images/btnsavemovies.svg";
-import { getCalculatingTimeMoveie } from "../../utils/convertMinutes";
+import './MoviesCard.css';
+import meMovie from '../../images/savemovie.svg';
+import deleteMovies from '../../images/deletemovies.svg';
+import saveMovie from '../../images/btnsavemovies.svg';
+import { getCalculatingTimeMoveie } from '../../utils/convertMinutes';
 
 const MoviesCard = ({ title, time, img, meMovies, isLiked }) => {
   return (

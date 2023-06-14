@@ -1,3 +1,8 @@
+.techs {
+  width: 90.6vw;
+  margin: 0 auto;
+}
+
 .techs__title {
   font-size: 18px;
   font-weight: 400;
@@ -5,9 +10,8 @@
   letter-spacing: -0.04em;
   text-align: left;
   border-bottom: 1px solid #000;
-  width: 90%;
   padding-bottom: 28px;
-  margin: 0 auto;
+  margin-right: 0;
 }
 
 .techs__title-technogogies {
@@ -16,12 +20,10 @@
   line-height: 36px;
   letter-spacing: -0.04em;
   text-align: center;
-  width: 90%;
   margin: 60px auto 24px;
 }
 
 .techs__paragraph {
-  width: 90%;
   margin: 0 auto 50px;
   font-size: 11px;
   font-weight: 400;
@@ -30,7 +32,7 @@
   text-align: center;
 }
 
-.block-technologies {
+.techs__technologies {
   display: grid;
   grid-template-columns: repeat(2, 84px);
   width: 55vw;
@@ -38,7 +40,7 @@
   gap: 10px;
 }
 
-.technologie {
+.techs__technologie {
   width: 84px;
   height: 57px;
   border-radius: 10px;
@@ -54,10 +56,9 @@
 @media (min-width: 340px) {
   .techs {
     height: 567px;
-    background-color: #f5f5f5;
   }
 
-  .block-technologies {
+  .techs__technologies {
     grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
     gap: 1em;
   }
@@ -82,13 +83,19 @@
     width: 460px;
   }
 
-  .block-technologies {
+  .techs__technologies {
     width: 70%;
   }
 }
 
 @media (min-width: 750px) {
-  .block-technologies {
+  .techs {
+    width: 100%;
+    margin: 0px;
+    background-color: #f5f5f5;
+  }
+
+  .techs__technologies {
     width: 650px;
     grid-template-columns: repeat(7, 84px);
     grid-template-rows: repeat(1, 1fr);
@@ -96,8 +103,9 @@
   }
 
   .techs__title {
+    margin: 0 auto;
     padding-top: 85px;
-    width: 88vw;
+    width: 86.9vw;
   }
 
   .techs__title-technogogies {
@@ -109,14 +117,14 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1250px) {
   .techs {
     height: 625px;
   }
 
   .techs__title {
     padding-top: 100px;
-    width: 89vw;
+    width: 1140px;
   }
 
   .techs__title-technogogies {
@@ -129,12 +137,12 @@
     line-height: 20px;
     margin-bottom: 100px;
   }
-  .block-technologies {
-    width: 675px;
+  .techs__technologies {
+    width: 670px;
     margin: 0 auto 100px;
   }
 
-  .technologie {
+  .techs__technologie {
     width: 90px;
     height: 60px;
   }

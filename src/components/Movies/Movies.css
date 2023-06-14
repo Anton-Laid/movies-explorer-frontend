@@ -1,24 +1,23 @@
 .movies {
   width: 94vw;
-  margin: 0 auto 160px;
+  margin: 80px auto 0;
 }
 
 @media (min-width: 750px) {
   .movies {
-    width: 92vw;
+    margin: 78px auto 80px;
   }
 }
 
 @media (min-width: 1100px) {
   .movies {
-    width: 89vw;
-    margin-bottom: 80px;
+    width: 91%;
+    margin: 70px auto 80px;
   }
 }
 
 @media (min-width: 1280px) {
   .movies {
-    width: 90%;
-    margin-bottom: 80px;
+    width: 1140px;
   }
 }

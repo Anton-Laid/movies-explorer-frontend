@@ -9,7 +9,7 @@
   width: 82px;
   height: 26px;
   border-radius: 10px;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 10px;
   font-weight: 500;
   line-height: 16px;
@@ -24,16 +24,21 @@
   opacity: 0.8;
 }
 
-@media (min-width: 740px) {
+@media (min-width: 400px) {
   .nav-tab {
     width: 308px;
     gap: 10px;
-    margin-top: 314px;
   }
 
   .nav-tab__button {
     width: 96px;
     height: 36px;
+  }
+}
+
+@media (min-width: 740px) {
+  .nav-tab {
+    margin-top: 314px;
   }
 }
 

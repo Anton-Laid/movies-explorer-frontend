@@ -1,15 +1,15 @@
-import { useState } from "react";
-import Main from "../Main/Main";
-import Header from "../Header/Header";
-import PopapNavigation from "../PopapNavigation/PopapNavigation";
-import NotFoud from "../NotFound/NotFoud";
-import Register from "../Register/Register";
-import Login from "../Login/Login";
-import { Route, Routes, useLocation } from "react-router-dom";
-import Profile from "../Profile/Profile";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import Footer from "../Footer/Footer";
+import { useState } from 'react';
+import Main from '../Main/Main';
+import Header from '../Header/Header';
+import PopapNavigation from '../PopapNavigation/PopapNavigation';
+import NotFoud from '../NotFound/NotFoud';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Profile from '../Profile/Profile';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Footer from '../Footer/Footer';
 
 function App() {
   const [openPopup, setOpenPupap] = useState(false);
@@ -17,8 +17,8 @@ function App() {
   const [authorization, setAuthorization] = useState(true);
   const [meMovies, setMeMovies] = useState(false);
   let location = useLocation();
-  const headerPaths = ["/", "/movies", "/saved-movies", "/profile"];
-  const footerPaths = ["/", "/movies", "/saved-movies"];
+  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
+  const footerPaths = ['/', '/movies', '/saved-movies'];
 
   const hendleClosePopup = () => {
     setOpenPupap(!openPopup);
@@ -33,7 +33,7 @@ function App() {
           authorization={authorization}
         />
       ) : (
-        ""
+        ''
       )}
       <Routes>
         <Route path="/signup" element={<Register />} />
@@ -61,7 +61,7 @@ function App() {
         openPopup={openPopup}
         hendleClosePopup={hendleClosePopup}
       />
-      {footerPaths.includes(location.pathname) ? <Footer /> : ""}
+      {footerPaths.includes(location.pathname) ? <Footer /> : ''}
     </div>
   );
 }

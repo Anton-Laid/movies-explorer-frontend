@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import "./SearchForm.css";
-import inputButton from "../../images/top.png";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import magnifier from "../../images/magnifier.png";
+import React, { useState } from 'react';
+import './SearchForm.css';
+import inputButton from '../../images/top.svg';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import btn from '../../images/icon.svg';
 
 const SearchForm = () => {
-  const [movie, setMovie] = useState("");
+  const [movie, setMovie] = useState('');
 
   return (
-    <>
-      <section className="search-form">
-        <img alt="лупа" src={magnifier} className="search-form__magnifier" />
+    <div className="search-form">
+      <form>
+        <img alt="лупа" src={btn} className="search-form__magnifier" />
         <input
+          className="search-form__input"
           id="search-form"
           name="inputPassword"
-          className="search-form__input"
           type="text"
           required
           autoComplete="off"
           placeholder="Фильм"
-          value={movie || ""}
+          value={movie || ''}
           minLength="2"
           maxLength="40"
           onChange={(e) => setMovie(e.target.value)}
@@ -35,8 +35,8 @@ const SearchForm = () => {
 
         <div className="search-form__line" />
         <FilterCheckbox />
-      </section>
-    </>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,11 @@
 .login {
-  width: 81vw;
+  width: 260px;
   margin: 56px auto 0;
+}
+
+.login__logo-positioning {
+  display: block;
+  margin: 0 auto 40px;
 }
 
 .login__title {
@@ -44,7 +49,7 @@
   color: #a0a0a0;
 }
 
-.login__btn-save {
+.login__submit {
   width: 100%;
   height: 45px;
   margin: 270px auto 14px;
@@ -61,11 +66,11 @@
   cursor: pointer;
 }
 
-.login__btn-save:hover {
+.login__submit:hover {
   opacity: 0.9;
 }
 
-.login__paragraph {
+.login__subtitle {
   color: #a0a0a0;
   font-size: 12px;
   font-weight: 400;
@@ -108,10 +113,14 @@
   opacity: 1;
 }
 
-@media (min-width: 550px) {
+@media (min-width: 650px) {
   .login {
-    width: 52vw;
+    width: 396px;
     margin: 232px auto 0;
+  }
+
+  .login__logo-positioning {
+    margin-left: 0;
   }
 
   .login__title {
@@ -119,7 +128,7 @@
     margin-bottom: 40px;
   }
 
-  .login__btn-save {
+  .login__submit {
     margin-top: 221px;
     font-size: 14px;
     line-height: 17px;
@@ -140,21 +149,25 @@
   }
 
   .login__input-error {
-    width: 52vw;
+    width: 100%;
   }
 
-  .login__btn-save {
+  .login__submit {
     margin-top: 190px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .login {
-    width: 27.5vw;
     margin: 70px auto 0;
   }
 
+  .login__logo-positioning {
+    width: 38px;
+    height: 38px;
+  }
+
   .login__input-error {
-    width: 27.5vw;
+    width: 100%;
   }
 }

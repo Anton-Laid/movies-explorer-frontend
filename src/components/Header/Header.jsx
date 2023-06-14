@@ -1,23 +1,25 @@
-import React from "react";
-import "./Header.css";
-import Logo from "../Logo/Logo";
-import Links from "../Links/Links";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import './Header.css';
+import Logo from '../Logo/Logo';
+import Links from '../Links/Links';
+import { NavLink } from 'react-router-dom';
 
 const Header = ({ hendleClosePopup, authorization }) => {
   return (
     <header className="header">
       {authorization ? (
         <>
-          <Logo />
+          <Logo modifier={'header__logo'} />
 
-          <button className="burger" onClick={hendleClosePopup} />
+          <button className="header__burger" onClick={hendleClosePopup} />
 
-          <menu className="main-menu">
+          <div className="header__main-menu">
             <NavLink
               to="/movies"
               className={({ isActive }) =>
-                `button-movies ${isActive ? "button-movies-active" : ""}`
+                `header__link-movies ${
+                  isActive ? 'header__link-movies_active' : ''
+                }`
               }
             >
               Фильмы
@@ -25,33 +27,35 @@ const Header = ({ hendleClosePopup, authorization }) => {
             <NavLink
               to="/saved-movies"
               className={({ isActive }) =>
-                `button-movies ${isActive ? "button-movies-active" : ""}`
+                `header__link-movies ${
+                  isActive ? 'header__link-movies_active' : ''
+                }`
               }
             >
               Сохранённые фильмы
             </NavLink>
-          </menu>
+          </div>
           <Links
-            path={"/profile"}
-            classStyle={"button-profile"}
-            title={"Аккаунт"}
+            path={'/profile'}
+            classStyle={'header__profile'}
+            title={'Аккаунт'}
           />
         </>
       ) : (
         <>
-          <Logo />
-          <menu className="menu">
+          <Logo modifier={'header__logo'} />
+          <div className="header__menu">
             <Links
-              path={"/signup"}
-              classStyle={"button-register"}
-              title={"Регистрация"}
+              path={'/signup'}
+              classStyle={'header__btn-register'}
+              title={'Регистрация'}
             />
             <Links
-              path={"/signin"}
-              classStyle={"button-login"}
-              title={"Войти"}
+              path={'/signin'}
+              classStyle={'header__btn-login'}
+              title={'Войти'}
             />
-          </menu>
+          </div>
         </>
       )}
     </header>

@@ -6,7 +6,7 @@
   background-color: #fff;
 }
 
-.btn-close {
+.navigation__btn-close {
   background-image: url(../../images/close.svg);
   width: 25px;
   height: 25px;
@@ -19,11 +19,11 @@
   cursor: pointer;
 }
 
-.btn-close:hover {
+.navigation__btn-close:hover {
   opacity: 0.6;
 }
 
-.link-text {
+.navigation__link-text {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -31,8 +31,8 @@
   padding-top: 144px;
 }
 
-.name-link {
-  font-family: "Inter", Arial, sans-serif;
+.navigation__name-link {
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 22px;
@@ -42,18 +42,18 @@
   color: #000;
 }
 
-.name-link:hover {
+.navigation__name-link:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 7px;
 }
 
-.btn-account {
+.navigation__btn-account {
   width: 100px;
   height: 24px;
   border: none;
   border-radius: 20px;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -68,7 +68,7 @@
   padding-top: 6px;
 }
 
-.btn-account:hover {
+.navigation__btn-account:hover {
   opacity: 0.6;
 }
 
@@ -77,16 +77,16 @@
     width: 520px;
   }
 
-  .btn-close {
+  .navigation__btn-close {
     top: 30px;
     right: 30px;
   }
 
-  .link-text {
+  .navigation__link-text {
     padding-top: 160px;
   }
 
-  .btn-account {
+  .navigation__btn-account {
     margin-top: 521px;
   }
 }
