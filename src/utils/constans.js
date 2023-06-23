@@ -3,16 +3,19 @@ const btnData = [
     nameBtn: 'О проекте',
     link: 'project',
     id: '1',
+    href: '#about-project',
   },
   {
     nameBtn: 'Технологии',
     link: 'technologies',
     id: '2',
+    href: '#techs',
   },
   {
     nameBtn: 'Студент',
     link: 'student',
     id: '3',
+    href: '#about-me',
   },
 ];
 

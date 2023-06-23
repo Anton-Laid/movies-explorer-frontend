@@ -8,16 +8,19 @@
 .nav-tab__button {
   width: 82px;
   height: 26px;
+  display: block;
   border-radius: 10px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 10px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 30px;
   letter-spacing: 0px;
   text-align: center;
   background-color: #e8e8e8;
+  color: #000;
   cursor: pointer;
   border: none;
+  text-decoration: none;
 }
 
 .nav-tab__button:hover {

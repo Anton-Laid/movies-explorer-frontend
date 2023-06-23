@@ -9,6 +9,13 @@
   gap: 16px;
 }
 
+.movies-card-list__massege {
+  color: #2c2c2c;
+  text-align: center;
+  font-size: 24px;
+  margin: 30px auto;
+}
+
 @media (min-width: 400px) {
   .movies-card-list {
     margin: 80px auto 160px;
@@ -26,6 +33,10 @@
     width: 320px;
     height: 36px;
     margin-top: 80px;
+  }
+
+  .movies-card-list__massege {
+    font-size: 50px;
   }
 }
 

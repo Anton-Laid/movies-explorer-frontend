@@ -12,14 +12,15 @@ import NavigationPopup from '../Navigation/Navigation';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/MainApi';
+import * as auth from '../../utils/Auth';
 import * as moviesApi from '../../utils/MoviesApi';
 
 function App() {
   // хуки
   let location = useLocation();
+  let navigate = useNavigate();
   //навигация
   const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerPaths = ['/', '/movies', '/saved-movies'];
@@ -36,10 +37,11 @@ function App() {
   });
   // данные фильмов
   const [dataMovies, setDataMovies] = useState([]);
-  console.log(dataMovies);
   const [mySaveMovi, setMySaveMovi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [updateMovies, setUpdateMovies] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [moreCards, setMoreCards] = useState(0);
 
   const hendleClosePopup = () => {
     setOpenPupap(!openPopup);
@@ -53,12 +55,6 @@ function App() {
     setUpdateMovies(!updateMovies);
   };
 
-  ///////////////////////////////
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [moreCards, setMoreCards] = useState(0);
-  //////////////////////////////////
-
-  //GET User
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
 
@@ -68,6 +64,7 @@ function App() {
         .then((res) => {
           setUserData({ name: res.name, email: res.email, id: res.id });
           setLoggedIn(true);
+          navigate('/movies', { replace: true });
         })
         .catch((err) => console.log(err));
     }
@@ -134,7 +131,7 @@ function App() {
   useEffect(() => {
     loggedIn && getMySaveMovies();
 
-    updateMovies && getMySaveMovies();
+    updateMovies && loggedIn && getMySaveMovies();
   }, [loggedIn, updateMovies]);
 
   const getMySaveMovies = () => {
@@ -158,7 +155,6 @@ function App() {
     isLiked ? handleDeleteMovie(id) : handleSaveMovies(movie);
   };
 
-  //  POST films
   const handleSaveMovies = (movie) => {
     moviesApi
       .createMovi(movie)
@@ -168,7 +164,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  // DELETE films
   const handleDeleteMovie = (id) => {
     moviesApi
       .deleteMovies(id)
@@ -208,6 +203,7 @@ function App() {
                 setPopapInfoTooltip={setPopapInfoTooltip}
                 setMessage={setMessage}
                 setLoggedIn={setLoggedIn}
+                setUserData={setUserData}
               />
             }
           />

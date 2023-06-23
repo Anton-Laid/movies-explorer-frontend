@@ -1,16 +1,12 @@
 import './Profile.css';
 import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/MainApi';
+import * as auth from '../../utils/Auth';
 import { useNavigate } from 'react-router';
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { validateEmail, validateName } from '../../utils/validation';
 
-const Profile = ({
-  userData,
-  setPopapInfoTooltip,
-  setMessage,
-  setLoggedIn,
-}) => {
+const Profile = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
   const { values, errors, isValue, handleChange, setValues } =
     useFormAndValidation();
   const currentUser = useContext(CurrentUserContext);
@@ -71,7 +67,7 @@ const Profile = ({
               isValue ? '' : 'profile__input-error_activ'
             }`}
           >
-            {errors.name}
+            {validateName(values.name).invalid}
           </span>
         </label>
 
@@ -94,10 +90,17 @@ const Profile = ({
               isValue ? '' : 'profile__input-error_activ'
             }`}
           >
-            {errors.email}
+            {validateEmail(values.email).invalid}
           </span>
         </label>
-        <button className="profile__btn-register" type="submit">
+        <button
+          className="profile__btn-register"
+          type="submit"
+          disabled={
+            validateEmail(values.email).invalid ||
+            validateName(values.name).invalid
+          }
+        >
           Редактировать
         </button>
       </form>

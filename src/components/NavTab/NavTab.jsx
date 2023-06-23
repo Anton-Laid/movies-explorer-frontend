@@ -7,9 +7,9 @@ const NavTab = () => {
     <nav className="nav-tab">
       {btnData.map((i) => {
         return (
-          <button className="nav-tab__button" key={i.id}>
+          <a className="nav-tab__button" key={i.id} href={i.href}>
             {i.nameBtn}
-          </button>
+          </a>
         );
       })}
     </nav>

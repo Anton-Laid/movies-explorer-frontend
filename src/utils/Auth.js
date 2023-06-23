@@ -1,4 +1,4 @@
-import { MAIN_URL } from '../utils/constans';
+import { MAIN_URL } from './constans';
 
 const handelResponse = (res) => (res.ok ? res.json() : Promise.reject(res));
 

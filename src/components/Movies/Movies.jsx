@@ -12,6 +12,7 @@ const Movies = ({
   handleShowMore,
   defaultValue,
 }) => {
+  const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
   return (
     <section className="movies">
       <SearchForm handleSearch={handleSearch} defaultValue={defaultValue} />
@@ -25,10 +26,13 @@ const Movies = ({
           deleteMovie={deleteMovie}
         />
       )}
-
-      <button className="movies__btn" onClick={handleShowMore} type="button">
-        Ещё
-      </button>
+      {movi.length < foundMovies.length ? (
+        <button className="movies__btn" onClick={handleShowMore} type="button">
+          Ещё
+        </button>
+      ) : (
+        ''
+      )}
     </section>
   );
 };

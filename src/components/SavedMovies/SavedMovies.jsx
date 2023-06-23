@@ -2,25 +2,33 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { useEffect, useState } from 'react';
 
-const SavedMovies = ({ isLoading, movi, deleteMovie, handleSearch }) => {
-  // const [shortFilms, setShortFilms] = useState(false);
-  // const [searchMovies, setSearchMovies] = useState('');
+const SavedMovies = ({ isLoading, movi, deleteMovie }) => {
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
-  // const filme = movi.filter((m) => {
-  //   if (shortFilms) {
-  //     return (
-  //       m.duration <= 40 &&
-  //       m.nameRU.toLowerCase().includes(searchMovies.toLowerCase())
-  //     );
-  //   } else if (!shortFilms) {
-  //     return m.nameRU.toLowerCase().includes(searchMovies.toLowerCase());
-  //   }
-  // });
+  function handleSearch(movieName, isShortFilms) {
+    const filteredMovies = movi.filter((item) =>
+      item.nameRU.toLowerCase().includes(movieName.toLowerCase())
+    );
+    if (isShortFilms) {
+      setFilteredMovies(filteredMovies.filter((item) => item.duration <= 40));
+    } else {
+      setFilteredMovies(filteredMovies);
+    }
+  }
 
-  // const headelFilterShort = () => {
-  //   setShortFilms(!shortFilms);
-  // };
+  function initFilteredMovies() {
+    setFilteredMovies(movi);
+  }
+
+  useEffect(() => {
+    setFilteredMovies(filteredMovies);
+  }, [movi, filteredMovies]);
+
+  useEffect(() => {
+    initFilteredMovies();
+  }, [movi]);
 
   return (
     <>
@@ -29,7 +37,7 @@ const SavedMovies = ({ isLoading, movi, deleteMovie, handleSearch }) => {
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList movi={movi} deleteMovie={deleteMovie} />
+          <MoviesCardList movi={filteredMovies} deleteMovie={deleteMovie} />
         )}
       </section>
     </>

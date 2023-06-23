@@ -4,7 +4,7 @@ import { dataTechnologie } from '../../utils/constans';
 
 const Techs = () => {
   return (
-    <section className="techs">
+    <section className="techs" id="techs">
       <h2 className="techs__title">Технологии</h2>
       <h2 className="techs__title-technogogies">7 технологий</h2>
       <p className="techs__paragraph">

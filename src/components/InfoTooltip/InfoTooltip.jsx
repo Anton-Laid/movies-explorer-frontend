@@ -1,8 +1,6 @@
 import React from 'react';
 import Popap from '../Popap/Popap';
 import './InfoTooltip.css';
-import unionTrue from '../../images/true.png';
-import unionFalse from '../../images/false.png';
 
 const InfoTooltip = ({ openPopup, hendleClosePopup, message }) => {
   return (
@@ -15,11 +13,9 @@ const InfoTooltip = ({ openPopup, hendleClosePopup, message }) => {
             className="info-tooltip__btn-close"
             onClick={hendleClosePopup}
           />
-          <img
-            className="info-tooltip__img"
-            alt="фото"
-            src={message.imgPath ? unionTrue : unionFalse}
-          />
+          <div className="info-tooltip__img">
+            {message.imgPath ? '😍' : '😔'}
+          </div>
           <h4 className="info-tooltip__title">{message.text}</h4>
         </div>
       }

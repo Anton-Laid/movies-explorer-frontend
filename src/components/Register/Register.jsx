@@ -1,10 +1,11 @@
 import Logo from '../Logo/Logo';
 import './Register.css';
 import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/MainApi';
+import * as auth from '../../utils/Auth';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { validateEmail, validateName } from '../../utils/validation';
 
 const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
   const { values, errors, isValid, handleChange } = useFormAndValidation();
@@ -20,7 +21,6 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
     auth
       .register(values)
       .then((res) => {
-        console.log(res);
         navigate('/signin', { replace: true });
         setPopapInfoTooltip(true);
         setMessage({
@@ -60,7 +60,7 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
               isValid ? '' : 'register__input-error_activ'
             }`}
           >
-            {errors.name}
+            {validateName(values.name).message}
           </span>
         </label>
         <label className="register__lable" htmlFor="register-email">
@@ -82,7 +82,7 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
               isValid ? '' : 'register__input-error_activ'
             }`}
           >
-            {errors.email}
+            {validateEmail(values.email).message}
           </span>
         </label>
         <label className="register__lable" htmlFor="register-password">
@@ -120,7 +120,11 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
             isValid ? '' : 'register__btn-save_disabled'
           }`}
           type="submit"
-          disabled={!isValid}
+          disabled={
+            !isValid ||
+            validateEmail(values.email).invalid ||
+            validateName(values.name).invalid
+          }
         >
           Зарегистрироваться
         </button>

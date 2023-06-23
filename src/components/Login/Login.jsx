@@ -1,11 +1,17 @@
 import Logo from '../Logo/Logo';
 import './Login.css';
 import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/MainApi';
+import * as auth from '../../utils/Auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { validateEmail } from '../../utils/validation';
 
-const Login = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
+const Login = ({
+  setPopapInfoTooltip,
+  setMessage,
+  setLoggedIn,
+  setUserData,
+}) => {
   const { values, errors, isValid, handleChange } = useFormAndValidation();
   const navigate = useNavigate();
   const [infoMes, setInfoMes] = useState('');
@@ -22,6 +28,11 @@ const Login = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
         setLoggedIn(true);
         navigate('/movies', { replace: true });
         setPopapInfoTooltip(true);
+        setUserData({
+          name: res.name,
+          email: res.email,
+          id: res.id,
+        });
         setMessage({
           imgPath: true,
           text: 'Вы успешно авторизовались',
@@ -58,7 +69,7 @@ const Login = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
               isValid ? '' : 'login__input-error_activ'
             }`}
           >
-            {errors.email}
+            {validateEmail(values.email).message}
           </span>
         </label>
         <label className="login__lable" htmlFor="login-passoword">
@@ -93,7 +104,7 @@ const Login = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
         <button
           className={`login__submit ${isValid ? '' : 'login__submit_disabled'}`}
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || validateEmail(values.email).invalid}
         >
           Войти
         </button>

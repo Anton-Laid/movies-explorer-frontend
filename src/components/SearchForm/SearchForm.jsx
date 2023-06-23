@@ -37,11 +37,9 @@ const SearchForm = ({ handleSearch, defaultValue }) => {
           className="search-form__input"
           name="search"
           type="search"
-          required
           value={movieName || ''}
           autoComplete="off"
           placeholder="Фильм"
-          min="1"
           onChange={handleChangeMovieName}
         />
         <button type="submit" className="search-form__button">
@@ -54,18 +52,7 @@ const SearchForm = ({ handleSearch, defaultValue }) => {
 
         <div className="search-form__line" />
 
-        {/* <FilterCheckbox /> */}
-        <div className="filter-checkbox">
-          <input
-            type="checkbox"
-            className="filter-checkbox__input"
-            id="switch"
-            checked={checkbox}
-            onChange={handleChangeCheckbox}
-          />
-          <label className="filter-checkbox__label" htmlFor="switch" />
-          <span className="filter-checkbox__title"> Короткометражки</span>
-        </div>
+        <FilterCheckbox handleChange={handleChangeCheckbox} />
       </form>
     </div>
   );
