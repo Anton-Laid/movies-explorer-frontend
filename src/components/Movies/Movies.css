@@ -1,0 +1,52 @@
+.movies {
+  width: 94vw;
+  margin: 80px auto 0;
+}
+
+.movies__btn {
+  width: 240px;
+  height: 36px;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  background-color: rgba(0, 0, 0, 0);
+  margin: 80px auto 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.movies__btn:hover {
+  background-color: #2be080;
+  color: #fff;
+  opacity: 0.8;
+}
+
+@media (min-width: 750px) {
+  .movies {
+    margin: 78px auto 80px;
+  }
+
+  .movies__btn {
+    width: 320px;
+    height: 36px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .movies {
+    width: 91%;
+    margin: 70px auto 80px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .movies {
+    width: 1140px;
+  }
+}

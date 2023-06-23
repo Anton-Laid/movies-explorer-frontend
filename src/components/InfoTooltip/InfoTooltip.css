@@ -1,0 +1,58 @@
+.info-tooltip {
+  width: 280px;
+  height: 270px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin: auto;
+  position: relative;
+}
+
+.info-tooltip__btn-close {
+  width: 20px;
+  height: 20px;
+  background-image: url(../../images/close.svg);
+  background-size: cover;
+  position: absolute;
+  top: -35px;
+  right: 0px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.info-tooltip__btn-close:hover {
+  opacity: 0.5;
+}
+
+.info-tooltip__img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 35px auto 30px;
+  outline: 1px #fff solid;
+  outline-offset: -1px;
+  background-size: cover;
+}
+
+.info-tooltip__title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 15px auto;
+}
+
+@media (min-width: 600px) {
+  .info-tooltip {
+    width: 320px;
+  }
+
+  .info-tooltip__btn-close {
+    width: 35px;
+    height: 35px;
+    top: -45px;
+    right: -30px;
+  }
+}

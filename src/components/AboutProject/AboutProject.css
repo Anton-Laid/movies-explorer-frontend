@@ -1,0 +1,184 @@
+.about-progect {
+  margin: 70px auto 130px;
+  width: 90.6vw;
+}
+
+.about-progect__title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  text-align: left;
+  margin: 0;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #000;
+}
+
+.about-progect__description {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.about-progect__description:nth-child(2) {
+  margin-top: 56px;
+}
+
+.about-progect__description-title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  text-align: left;
+  margin: 0 auto 16px;
+}
+
+.about-progect__subtitle {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 0;
+}
+
+.about-progect__term {
+  width: 100%;
+  display: flex;
+  margin-top: 60px;
+}
+
+.about-progect__term-week {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.about-progect__term-one {
+  width: 35%;
+  height: 35px;
+  background-color: #2be080;
+}
+
+.about-progect__term-two {
+  width: 65%;
+  height: 35px;
+  background-color: #f2f2f2;
+}
+.about-progect__tech-week {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.about-progect__tech {
+  width: 100%;
+  display: flex;
+}
+
+.about-progect__tech-backend {
+  width: 35%;
+  height: 35px;
+}
+
+.about-progect__tech-frontend {
+  width: 65%;
+  height: 35px;
+}
+
+@media (min-width: 550px) {
+  .about-progect {
+    width: 86.9vw;
+    margin: 90px auto;
+    height: 100%;
+  }
+
+  .about-progect__title {
+    height: 27px;
+  }
+
+  .about-progect__container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .about-progect__description {
+    margin-top: 70px;
+  }
+
+  .about-progect__description:nth-child(2) {
+    margin-top: 70px;
+  }
+
+  .about-progect__description-title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 22px;
+  }
+
+  .about-progect__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-progect__term-one {
+    width: 21%;
+  }
+
+  .about-progect__term {
+    margin-top: 93px;
+  }
+
+  .about-progect__term-two {
+    width: 79%;
+  }
+
+  .about-progect__tech-backend {
+    width: 21%;
+  }
+
+  .about-progect__tech-frontend {
+    width: 79%;
+  }
+}
+
+@media (min-width: 1250px) {
+  .about-progect {
+    width: 1140px;
+    margin: 110px auto 127px;
+  }
+
+  .about-progect__container {
+    gap: 40px;
+  }
+
+  .about-progect__description-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .about-progect__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-progect__term-one {
+    width: 20%;
+  }
+
+  .about-progect__term-two {
+    width: 80%;
+  }
+
+  .about-progect__tech-backend {
+    width: 20%;
+  }
+
+  .about-progect__tech-frontend {
+    width: 80%;
+  }
+}
