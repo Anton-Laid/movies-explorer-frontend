@@ -36,6 +36,7 @@ function App() {
   });
   // данные фильмов
   const [dataMovies, setDataMovies] = useState([]);
+  console.log(dataMovies);
   const [mySaveMovi, setMySaveMovi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [updateMovies, setUpdateMovies] = useState(true);
@@ -72,61 +73,86 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    loggedIn &&
-      moviesApi.getSaveMovies().then((movies) => {
-        localStorage.setItem('savedMovies', JSON.stringify(movies));
-        setMySaveMovi(movies);
+  const searchMovie = (movieName, isShortFilms) => {
+    setIsLoading(true);
+    moviesApi
+      .getMovies()
+      .then((movies) => {
+        const searchedMovies = movies.filter((item) =>
+          item.nameRU.toLowerCase().includes(movieName.toLowerCase())
+        );
+        const foundMovies = isShortFilms
+          ? searchedMovies.filter((item) => item.duration <= 40)
+          : searchedMovies;
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+        localStorage.setItem('searchMovieName', movieName);
+        localStorage.setItem('shortFilms', isShortFilms);
+        setIsLoading(false);
+        handleResize();
+      })
+      .catch((err) => {
+        console.log(err.message);
         setIsLoading(false);
       });
+  };
 
-    updateMovies &&
-      moviesApi.getSaveMovies().then((movies) => {
-        localStorage.setItem('savedMovies', JSON.stringify(movies));
-        setMySaveMovi(movies);
-        setIsLoading(false);
-      });
-  }, [loggedIn, updateMovies]);
+  const checkWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const handleResize = () => {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    if (foundMovies === null) {
+      return;
+    }
+    if (windowWidth >= 950) {
+      setDataMovies(foundMovies.slice(0, 12));
+      setMoreCards(3);
+    } else if (windowWidth > 650 && windowWidth < 1280) {
+      setDataMovies(foundMovies.slice(0, 8));
+      setMoreCards(2);
+    } else if (windowWidth <= 450) {
+      setDataMovies(foundMovies.slice(0, 5));
+      setMoreCards(2);
+    }
+  };
 
   useEffect(() => {
-    loggedIn &&
-      moviesApi.getMovies().then((movies) => {
-        console.log(windowWidth);
-        if (windowWidth <= 450) {
-          setDataMovies(movies.slice(0, 5));
-          console.log(dataMovies);
-          setMoreCards(2);
-          setIsLoading(false);
-        } else if (windowWidth <= 850) {
-          setDataMovies(movies.slice(0, 8));
-          setMoreCards(2);
-          setIsLoading(false);
-        } else if (windowWidth >= 1000) {
-          setDataMovies(movies.slice(0, 12));
-          setMoreCards(3);
-          setIsLoading(false);
-        }
-      });
+    window.addEventListener('resize', checkWindowWidth);
+    handleResize();
+  }, [windowWidth]);
 
-    updateMovies &&
-      moviesApi.getMovies().then((movies) => {
-        console.log(windowWidth);
-        if (windowWidth <= 450) {
-          setDataMovies(movies.slice(0, 5));
-          console.log(dataMovies);
-          setMoreCards(2);
-          setIsLoading(false);
-        } else if (windowWidth <= 850) {
-          setDataMovies(movies.slice(0, 8));
-          setMoreCards(2);
-          setIsLoading(false);
-        } else if (windowWidth >= 1000) {
-          setDataMovies(movies.slice(0, 12));
-          setMoreCards(3);
-          setIsLoading(false);
-        }
-      });
+  const handleShowMore = () => {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    setDataMovies(foundMovies.slice(0, dataMovies.length + moreCards));
+  };
+
+  const handleSearch = (movieName, isShortFilms) => {
+    searchMovie(movieName, isShortFilms);
+  };
+
+  useEffect(() => {
+    loggedIn && getMySaveMovies();
+
+    updateMovies && getMySaveMovies();
   }, [loggedIn, updateMovies]);
+
+  const getMySaveMovies = () => {
+    return moviesApi.getSaveMovies().then((movies) => {
+      localStorage.setItem('savedMovies', JSON.stringify(movies));
+      setMySaveMovi(movies);
+      setIsLoading(false);
+    });
+  };
+
+  const handleMoviesSave = (movies) => {
+    moviesApi
+      .createMovi(movies)
+      .then((m) => {
+        setDataMovies([...dataMovies, m]);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleAddMovies = (movie, isLiked, id) => {
     isLiked ? handleDeleteMovie(id) : handleSaveMovies(movie);
@@ -213,10 +239,14 @@ function App() {
             path="/movies"
             element={
               <ProtectedRoute
-                loggedIn={loggedIn}
-                isLoading={isLoading}
                 element={Movies}
+                loggedIn={loggedIn}
+                handleSearch={handleSearch}
+                defaultValue={localStorage.getItem('searchMovieName') || ''}
                 movi={dataMovies}
+                handleShowMore={handleShowMore}
+                handleMoviesSave={handleMoviesSave}
+                isLoading={isLoading}
                 addMovies={handleAddMovies}
                 deleteMovie={handleDeleteMovie}
               />

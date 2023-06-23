@@ -3,9 +3,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const SavedMovies = ({ isLoading, movi, deleteMovie }) => {
+const SavedMovies = ({ isLoading, movi, deleteMovie, handleSearch }) => {
   // const [shortFilms, setShortFilms] = useState(false);
-  //const [searchMovies, setSearchMovies] = useState('');
+  // const [searchMovies, setSearchMovies] = useState('');
 
   // const filme = movi.filter((m) => {
   //   if (shortFilms) {
@@ -25,7 +25,7 @@ const SavedMovies = ({ isLoading, movi, deleteMovie }) => {
   return (
     <>
       <section className="movies">
-        <SearchForm />
+        <SearchForm handleSearch={handleSearch} defaultValue="" />
         {isLoading ? (
           <Preloader />
         ) : (
