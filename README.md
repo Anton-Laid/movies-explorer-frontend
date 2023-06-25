@@ -5,3 +5,5 @@
 ссылка на zip макета: https://yadi.sk/d/xGzYXFCgaO43jA
 
 сслыка на pull request: https://github.com/AntonLiad/movies-explorer-frontend/pull/2
+
+ссылка на сайт: https://moviespoisk.nomoredomains.monster
