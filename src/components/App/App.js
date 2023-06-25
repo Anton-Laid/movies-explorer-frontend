@@ -1,39 +1,39 @@
-import Main from '../Main/Main';
-import Header from '../Header/Header';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import NotFoud from '../NotFound/NotFoud';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import Profile from '../Profile/Profile';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Footer from '../Footer/Footer';
-import NavigationPopup from '../Navigation/Navigation';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Main from "../Main/Main";
+import Header from "../Header/Header";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import NotFoud from "../NotFound/NotFoud";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Footer from "../Footer/Footer";
+import NavigationPopup from "../Navigation/Navigation";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import { useEffect, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import * as auth from '../../utils/Auth';
-import * as moviesApi from '../../utils/MoviesApi';
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import * as auth from "../../utils/Auth";
+import * as moviesApi from "../../utils/MoviesApi";
 
 function App() {
   // хуки
   let location = useLocation();
   let navigate = useNavigate();
   //навигация
-  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerPaths = ['/', '/movies', '/saved-movies'];
+  const headerPaths = ["/", "/movies", "/saved-movies", "/profile"];
+  const footerPaths = ["/", "/movies", "/saved-movies"];
   // пользователь
-  const [userData, setUserData] = useState({ name: '', email: '', id: '' });
+  const [userData, setUserData] = useState({ name: "", email: "" });
   const [loggedIn, setLoggedIn] = useState(false);
   // попап
   const [popapInfoTooltip, setPopapInfoTooltip] = useState(false);
   const [openPopup, setOpenPupap] = useState(false);
   // инфо попапа
   const [message, setMessage] = useState({
-    imgPath: '',
-    text: '',
+    imgPath: "",
+    text: "",
   });
   // данные фильмов
   const [dataMovies, setDataMovies] = useState([]);
@@ -56,7 +56,7 @@ function App() {
   };
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
       auth
@@ -64,7 +64,7 @@ function App() {
         .then((res) => {
           setUserData({ name: res.name, email: res.email, id: res.id });
           setLoggedIn(true);
-          navigate('/movies', { replace: true });
+          navigate("/movies", { replace: true });
         })
         .catch((err) => console.log(err));
     }
@@ -81,9 +81,9 @@ function App() {
         const foundMovies = isShortFilms
           ? searchedMovies.filter((item) => item.duration <= 40)
           : searchedMovies;
-        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-        localStorage.setItem('searchMovieName', movieName);
-        localStorage.setItem('shortFilms', isShortFilms);
+        localStorage.setItem("foundMovies", JSON.stringify(foundMovies));
+        localStorage.setItem("searchMovieName", movieName);
+        localStorage.setItem("shortFilms", isShortFilms);
         setIsLoading(false);
         handleResize();
       })
@@ -98,7 +98,7 @@ function App() {
   };
 
   const handleResize = () => {
-    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
     if (foundMovies === null) {
       return;
     }
@@ -115,12 +115,12 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', checkWindowWidth);
+    window.addEventListener("resize", checkWindowWidth);
     handleResize();
-  }, [windowWidth]);
+  }, []);
 
   const handleShowMore = () => {
-    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
     setDataMovies(foundMovies.slice(0, dataMovies.length + moreCards));
   };
 
@@ -136,7 +136,7 @@ function App() {
 
   const getMySaveMovies = () => {
     return moviesApi.getSaveMovies().then((movies) => {
-      localStorage.setItem('savedMovies', JSON.stringify(movies));
+      localStorage.setItem("savedMovies", JSON.stringify(movies));
       setMySaveMovi(movies);
       setIsLoading(false);
     });
@@ -167,7 +167,7 @@ function App() {
   const handleDeleteMovie = (id) => {
     moviesApi
       .deleteMovies(id)
-      .then((res) => {
+      .then(() => {
         hendelUpdateMovies();
       })
       .catch((err) => console.log(err));
@@ -183,7 +183,7 @@ function App() {
             loggedIn={loggedIn}
           />
         ) : (
-          ''
+          ""
         )}
         <Routes>
           <Route
@@ -238,7 +238,7 @@ function App() {
                 element={Movies}
                 loggedIn={loggedIn}
                 handleSearch={handleSearch}
-                defaultValue={localStorage.getItem('searchMovieName') || ''}
+                defaultValue={localStorage.getItem("searchMovieName") || ""}
                 movi={dataMovies}
                 handleShowMore={handleShowMore}
                 handleMoviesSave={handleMoviesSave}
@@ -273,7 +273,7 @@ function App() {
           openPopup={popapInfoTooltip}
           hendleClosePopup={heandelClosePopup}
         />
-        {footerPaths.includes(location.pathname) ? <Footer /> : ''}
+        {footerPaths.includes(location.pathname) ? <Footer /> : ""}
       </>
     </CurrentUserContext.Provider>
   );

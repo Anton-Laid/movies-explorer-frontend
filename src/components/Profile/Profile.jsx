@@ -1,14 +1,13 @@
-import './Profile.css';
-import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/Auth';
-import { useNavigate } from 'react-router';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { validateEmail, validateName } from '../../utils/validation';
+import "./Profile.css";
+import { useFormAndValidation } from "../../hooks/validation";
+import * as auth from "../../utils/Auth";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { validateEmail, validateName } from "../../utils/validation";
 
 const Profile = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
-  const { values, errors, isValue, handleChange, setValues } =
-    useFormAndValidation();
+  const { values, isValue, handleChange, setValues } = useFormAndValidation();
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
@@ -20,26 +19,28 @@ const Profile = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
   const onProfileUpdate = ({ values }) => {
     auth
       .upDateUser(values)
-      .then((res) => {
+      .then(() => {
         setPopapInfoTooltip(true);
         setMessage({
           imgPath: true,
-          text: 'Данные изменены',
+          text: "Данные изменены",
         });
         setValues({});
       })
       .catch((err) => {
-        setPopapInfoTooltip(true);
-        setMessage({
-          imgPath: false,
-          text: err.message,
-        });
+        if (err.status === 409) {
+          setPopapInfoTooltip(true);
+          setMessage({
+            imgPath: false,
+            text: "Что-то пошло не так...",
+          });
+        }
       });
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    navigate('/');
+    localStorage.removeItem("jwt");
+    navigate("/");
     setLoggedIn(false);
   };
 
@@ -57,14 +58,14 @@ const Profile = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
             type="text"
             required
             placeholder=""
-            value={values.name || ''}
+            value={values.name || ""}
             minLength="2"
             maxLength="40"
             onChange={handleChange}
           />
           <span
             className={`profile__input-error  ${
-              isValue ? '' : 'profile__input-error_activ'
+              isValue ? "" : "profile__input-error_activ"
             }`}
           >
             {validateName(values.name).invalid}
@@ -80,14 +81,14 @@ const Profile = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
             type="email"
             required
             placeholder=""
-            value={values.email || ''}
+            value={values.email || ""}
             minLength="2"
             maxLength="40"
             onChange={handleChange}
           />
           <span
             className={`profile__input-error  ${
-              isValue ? '' : 'profile__input-error_activ'
+              isValue ? "" : "profile__input-error_activ"
             }`}
           >
             {validateEmail(values.email).invalid}

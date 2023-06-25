@@ -1,10 +1,10 @@
-import Logo from '../Logo/Logo';
-import './Login.css';
-import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/Auth';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { validateEmail } from '../../utils/validation';
+import Logo from "../Logo/Logo";
+import "./Login.css";
+import { useFormAndValidation } from "../../hooks/validation";
+import * as auth from "../../utils/Auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { validateEmail } from "../../utils/validation";
 
 const Login = ({
   setPopapInfoTooltip,
@@ -14,7 +14,7 @@ const Login = ({
 }) => {
   const { values, errors, isValid, handleChange } = useFormAndValidation();
   const navigate = useNavigate();
-  const [infoMes, setInfoMes] = useState('');
+  const [infoMes, setInfoMes] = useState("");
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -26,28 +26,22 @@ const Login = ({
       .login(values)
       .then((res) => {
         setLoggedIn(true);
-        navigate('/movies', { replace: true });
+        navigate("/movies", { replace: true });
         setPopapInfoTooltip(true);
-        setUserData({
-          name: res.name,
-          email: res.email,
-          id: res.id,
-        });
+        setUserData({ name: res.name, email: res.email });
         setMessage({
           imgPath: true,
-          text: 'Вы успешно авторизовались',
+          text: "Вы успешно авторизовались",
         });
       })
       .catch((err) => {
-        if (err.status === 401) {
-          setInfoMes('Неверная почта или пароль');
-        } else setInfoMes('Что-то пошло не так! Попробуйте ещё раз...');
+        setInfoMes("Что-то пошло не так! Попробуйте ещё раз...");
       });
   };
 
   return (
     <section className="login">
-      <Logo modifier={'login__logo-positioning'} />
+      <Logo modifier={"login__logo-positioning"} />
       <h2 className="login__title">Рады видеть!</h2>
       <form onSubmit={handelSubmit}>
         <label className="login__lable" htmlFor="login-email">
@@ -59,14 +53,14 @@ const Login = ({
             type="email"
             required
             placeholder=""
-            value={values.email || ''}
+            value={values.email || ""}
             minLength="2"
             maxLength="40"
             onChange={handleChange}
           />
           <span
             className={`login__input-error  ${
-              isValid ? '' : 'login__input-error_activ'
+              isValid ? "" : "login__input-error_activ"
             }`}
           >
             {validateEmail(values.email).message}
@@ -81,14 +75,14 @@ const Login = ({
             type="password"
             required
             placeholder=""
-            value={values.password || ''}
+            value={values.password || ""}
             minLength="2"
             maxLength="40"
             onChange={handleChange}
           />
           <span
             className={`login__input-error  ${
-              isValid ? '' : 'login__input-error_activ'
+              isValid ? "" : "login__input-error_activ"
             }`}
           >
             {errors.password}
@@ -96,13 +90,13 @@ const Login = ({
         </label>
         <span
           className={`login__error-message ${
-            infoMes ? 'login__error-message_activ' : ''
+            infoMes ? "login__error-message_activ" : ""
           }`}
         >
           {infoMes}
         </span>
         <button
-          className={`login__submit ${isValid ? '' : 'login__submit_disabled'}`}
+          className={`login__submit ${isValid ? "" : "login__submit_disabled"}`}
           type="submit"
           disabled={!isValid || validateEmail(values.email).invalid}
         >
@@ -110,7 +104,7 @@ const Login = ({
         </button>
         <div className="login__box-btn">
           <p className="login__subtitle">Ещё не зарегистрированы?</p>
-          <Link className="register__btn-signin" to={'/signup'}>
+          <Link className="register__btn-signin" to={"/signup"}>
             Регистрация
           </Link>
         </div>
