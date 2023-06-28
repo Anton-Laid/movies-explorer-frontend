@@ -97,7 +97,7 @@ const Login = ({
           {infoMes}
         </span>
         <button
-          className={`login__submit ${isValid ? '' : 'login__submit_disabled'}`}
+          className="login__submit"
           type="submit"
           disabled={!isValid || validateEmail(values.email).invalid}
         >

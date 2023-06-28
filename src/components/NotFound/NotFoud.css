@@ -41,6 +41,8 @@
   text-decoration: none;
   cursor: pointer;
   display: block;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 @media (min-width: 550px) {

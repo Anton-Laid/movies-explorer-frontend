@@ -26,7 +26,6 @@ function App() {
   const footerPaths = ['/', '/movies', '/saved-movies'];
   // пользователь
   const [userData, setUserData] = useState({});
-  console.log(userData);
   const [loggedIn, setLoggedIn] = useState(false);
   // попап
   const [popapInfoTooltip, setPopapInfoTooltip] = useState(false);
@@ -49,14 +48,19 @@ function App() {
       .then((res) => {
         setUserData(res);
         setLoggedIn(true);
-        navigate('/movies', { replace: true });
+        navigate(location.pathname);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     reFetch();
   }, [loggedIn]);
+
+  useEffect(() => {
+    window.addEventListener('resize', checkWindowWidth);
+    handleResize();
+  }, []);
 
   const hendleClosePopup = () => {
     setOpenPupap(!openPopup);
@@ -68,6 +72,10 @@ function App() {
 
   const hendelUpdateMovies = () => {
     reFetch();
+  };
+
+  const reFetch = () => {
+    loggedIn && getMySaveMovies();
   };
 
   const searchMovie = (movieName, isShortFilms) => {
@@ -114,11 +122,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('resize', checkWindowWidth);
-    handleResize();
-  }, []);
-
   const handleShowMore = () => {
     const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
     setDataMovies(foundMovies.slice(0, dataMovies.length + moreCards));
@@ -126,10 +129,6 @@ function App() {
 
   const handleSearch = (movieName, isShortFilms) => {
     searchMovie(movieName, isShortFilms);
-  };
-
-  const reFetch = () => {
-    loggedIn && getMySaveMovies();
   };
 
   const getMySaveMovies = () => {
@@ -262,7 +261,7 @@ function App() {
             }
           />
 
-          <Route path="*" element={<NotFoud />} />
+          <Route path="*" element={<NotFoud loggedIn={loggedIn} />} />
         </Routes>
         <NavigationPopup
           openPopup={openPopup}

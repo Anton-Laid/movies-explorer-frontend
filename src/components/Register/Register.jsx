@@ -116,9 +116,7 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
           {infoMes}
         </span>
         <button
-          className={`register__btn-save ${
-            isValid ? '' : 'register__btn-save_disabled'
-          }`}
+          className="register__btn-save"
           type="submit"
           disabled={
             !isValid ||
