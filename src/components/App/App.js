@@ -1,47 +1,62 @@
-import Main from "../Main/Main";
-import Header from "../Header/Header";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import NotFoud from "../NotFound/NotFoud";
-import Register from "../Register/Register";
-import Login from "../Login/Login";
-import Profile from "../Profile/Profile";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import Footer from "../Footer/Footer";
-import NavigationPopup from "../Navigation/Navigation";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Main from '../Main/Main';
+import Header from '../Header/Header';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import NotFoud from '../NotFound/NotFoud';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Footer from '../Footer/Footer';
+import NavigationPopup from '../Navigation/Navigation';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import * as auth from "../../utils/Auth";
-import * as moviesApi from "../../utils/MoviesApi";
+import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import * as auth from '../../utils/Auth';
+import * as moviesApi from '../../utils/MoviesApi';
 
 function App() {
   // хуки
   let location = useLocation();
   let navigate = useNavigate();
   //навигация
-  const headerPaths = ["/", "/movies", "/saved-movies", "/profile"];
-  const footerPaths = ["/", "/movies", "/saved-movies"];
+  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
+  const footerPaths = ['/', '/movies', '/saved-movies'];
   // пользователь
-  const [userData, setUserData] = useState({ name: "", email: "" });
+  const [userData, setUserData] = useState({});
+  console.log(userData);
   const [loggedIn, setLoggedIn] = useState(false);
   // попап
   const [popapInfoTooltip, setPopapInfoTooltip] = useState(false);
   const [openPopup, setOpenPupap] = useState(false);
   // инфо попапа
   const [message, setMessage] = useState({
-    imgPath: "",
-    text: "",
+    imgPath: '',
+    text: '',
   });
   // данные фильмов
   const [dataMovies, setDataMovies] = useState([]);
   const [mySaveMovi, setMySaveMovi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateMovies, setUpdateMovies] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [moreCards, setMoreCards] = useState(0);
+
+  useEffect(() => {
+    auth
+      .getContent()
+      .then((res) => {
+        setUserData(res);
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
+
+  useEffect(() => {
+    reFetch();
+  }, [loggedIn]);
 
   const hendleClosePopup = () => {
     setOpenPupap(!openPopup);
@@ -52,23 +67,8 @@ function App() {
   };
 
   const hendelUpdateMovies = () => {
-    setUpdateMovies(!updateMovies);
+    reFetch();
   };
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-
-    if (jwt) {
-      auth
-        .getContent()
-        .then((res) => {
-          setUserData({ name: res.name, email: res.email, id: res.id });
-          setLoggedIn(true);
-          navigate("/movies", { replace: true });
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
 
   const searchMovie = (movieName, isShortFilms) => {
     setIsLoading(true);
@@ -81,9 +81,9 @@ function App() {
         const foundMovies = isShortFilms
           ? searchedMovies.filter((item) => item.duration <= 40)
           : searchedMovies;
-        localStorage.setItem("foundMovies", JSON.stringify(foundMovies));
-        localStorage.setItem("searchMovieName", movieName);
-        localStorage.setItem("shortFilms", isShortFilms);
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+        localStorage.setItem('searchMovieName', movieName);
+        localStorage.setItem('shortFilms', isShortFilms);
         setIsLoading(false);
         handleResize();
       })
@@ -98,7 +98,7 @@ function App() {
   };
 
   const handleResize = () => {
-    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
     if (foundMovies === null) {
       return;
     }
@@ -115,12 +115,12 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", checkWindowWidth);
+    window.addEventListener('resize', checkWindowWidth);
     handleResize();
   }, []);
 
   const handleShowMore = () => {
-    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'));
     setDataMovies(foundMovies.slice(0, dataMovies.length + moreCards));
   };
 
@@ -128,15 +128,13 @@ function App() {
     searchMovie(movieName, isShortFilms);
   };
 
-  useEffect(() => {
+  const reFetch = () => {
     loggedIn && getMySaveMovies();
-
-    updateMovies && loggedIn && getMySaveMovies();
-  }, [loggedIn, updateMovies]);
+  };
 
   const getMySaveMovies = () => {
     return moviesApi.getSaveMovies().then((movies) => {
-      localStorage.setItem("savedMovies", JSON.stringify(movies));
+      localStorage.setItem('savedMovies', JSON.stringify(movies));
       setMySaveMovi(movies);
       setIsLoading(false);
     });
@@ -158,7 +156,7 @@ function App() {
   const handleSaveMovies = (movie) => {
     moviesApi
       .createMovi(movie)
-      .then((res) => {
+      .then(() => {
         hendelUpdateMovies();
       })
       .catch((err) => console.log(err));
@@ -183,7 +181,7 @@ function App() {
             loggedIn={loggedIn}
           />
         ) : (
-          ""
+          ''
         )}
         <Routes>
           <Route
@@ -209,18 +207,6 @@ function App() {
           />
 
           <Route
-            path="/profile"
-            element={
-              <Profile
-                setLoggedIn={setLoggedIn}
-                nameUser={userData}
-                setPopapInfoTooltip={setPopapInfoTooltip}
-                setMessage={setMessage}
-              />
-            }
-          />
-
-          <Route
             path="/"
             element={
               <Main
@@ -232,13 +218,27 @@ function App() {
           />
 
           <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                element={Profile}
+                setLoggedIn={setLoggedIn}
+                loggedIn={loggedIn}
+                nameUser={userData}
+                setPopapInfoTooltip={setPopapInfoTooltip}
+                setMessage={setMessage}
+              />
+            }
+          />
+
+          <Route
             path="/movies"
             element={
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
                 handleSearch={handleSearch}
-                defaultValue={localStorage.getItem("searchMovieName") || ""}
+                defaultValue={localStorage.getItem('searchMovieName') || ''}
                 movi={dataMovies}
                 handleShowMore={handleShowMore}
                 handleMoviesSave={handleMoviesSave}
@@ -273,7 +273,7 @@ function App() {
           openPopup={popapInfoTooltip}
           hendleClosePopup={heandelClosePopup}
         />
-        {footerPaths.includes(location.pathname) ? <Footer /> : ""}
+        {footerPaths.includes(location.pathname) ? <Footer /> : ''}
       </>
     </CurrentUserContext.Provider>
   );

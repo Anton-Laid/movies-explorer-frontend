@@ -37,7 +37,9 @@ const MoviesCard = ({ movie, deleteMovie, addMovies }) => {
       <p className="movies-card__time">
         {getCalculatingTimeMoveie(movie.duration)}
       </p>
-      <img alt="обложка фильма" src={imageUrl} className="movies-card__img" />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img alt="обложка фильма" src={imageUrl} className="movies-card__img" />
+      </a>
     </section>
   );
 };

@@ -1,7 +1,7 @@
-import "./Movies.css";
-import SearchForm from "../SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import './Movies.css';
+import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 const Movies = ({
   movi,
@@ -12,7 +12,7 @@ const Movies = ({
   handleShowMore,
   defaultValue,
 }) => {
-  const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+  const foundMovies = JSON.parse(localStorage.getItem('foundMovies')) || [];
 
   return (
     <section className="movies">
@@ -32,7 +32,7 @@ const Movies = ({
           Ещё
         </button>
       ) : (
-        ""
+        ''
       )}
     </section>
   );
