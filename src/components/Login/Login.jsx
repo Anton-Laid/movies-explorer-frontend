@@ -1,45 +1,16 @@
 import Logo from '../Logo/Logo';
 import './Login.css';
 import { useFormAndValidation } from '../../hooks/validation';
-import * as auth from '../../utils/Auth';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { validateEmail } from '../../utils/validation';
+import { Link } from 'react-router-dom';
 
-const Login = ({
-  setPopapInfoTooltip,
-  setMessage,
-  setLoggedIn,
-  setUserData,
-}) => {
+const Login = ({ onLogin, infoMes }) => {
   const { values, errors, isValid, handleChange } = useFormAndValidation();
-  const navigate = useNavigate();
-  const [infoMes, setInfoMes] = useState('');
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    onLogin({ values });
+    onLogin(values);
   };
-
-  const onLogin = ({ values }) => {
-    auth
-      .login(values)
-      .then((res) => {
-        setLoggedIn(true);
-        setPopapInfoTooltip(true);
-        console.log(res);
-        setUserData({ name: res.name, email: res.email, token: res.token });
-        setMessage({
-          imgPath: true,
-          text: 'Вы успешно авторизовались',
-        });
-        navigate('/movies', { replace: true });
-      })
-      .catch(() => {
-        setInfoMes('Что-то пошло не так! Попробуйте ещё раз...');
-      });
-  };
-
   return (
     <section className="login">
       <Logo modifier={'login__logo-positioning'} />

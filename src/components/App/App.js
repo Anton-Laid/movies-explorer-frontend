@@ -35,12 +35,14 @@ function App() {
     imgPath: '',
     text: '',
   });
+  const [infoMes, setInfoMes] = useState('');
   // данные фильмов
   const [dataMovies, setDataMovies] = useState([]);
   const [mySaveMovi, setMySaveMovi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [moreCards, setMoreCards] = useState(0);
+  const [renderMovi, setRenderMovi] = useState(false);
 
   useEffect(() => {
     auth
@@ -49,6 +51,7 @@ function App() {
         setUserData(res);
         setLoggedIn(true);
         navigate(location.pathname);
+        getMySaveMovies();
       })
       .catch((err) => console.log(err));
   }, []);
@@ -94,6 +97,7 @@ function App() {
         localStorage.setItem('shortFilms', isShortFilms);
         setIsLoading(false);
         handleResize();
+        setRenderMovi(true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -170,6 +174,24 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const hendelAuth = (values) => {
+    auth
+      .login(values)
+      .then((res) => {
+        setLoggedIn(true);
+        setPopapInfoTooltip(true);
+        setUserData({ name: res.name, email: res.email, token: res.token });
+        setMessage({
+          imgPath: true,
+          text: 'Вы успешно авторизовались',
+        });
+        navigate('/movies', { replace: true });
+      })
+      .catch(() => {
+        setInfoMes('Что-то пошло не так! Попробуйте ещё раз...');
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={userData}>
       <>
@@ -185,24 +207,11 @@ function App() {
         <Routes>
           <Route
             path="/signup"
-            element={
-              <Register
-                setPopapInfoTooltip={setPopapInfoTooltip}
-                setMessage={setMessage}
-                setLoggedIn={setLoggedIn}
-              />
-            }
+            element={<Register infoMes={infoMes} onLogin={hendelAuth} />}
           />
           <Route
             path="/signin"
-            element={
-              <Login
-                setPopapInfoTooltip={setPopapInfoTooltip}
-                setMessage={setMessage}
-                setLoggedIn={setLoggedIn}
-                setUserData={setUserData}
-              />
-            }
+            element={<Login infoMes={infoMes} onLogin={hendelAuth} />}
           />
 
           <Route
@@ -220,12 +229,14 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute
+                setUserData={setUserData}
                 element={Profile}
                 setLoggedIn={setLoggedIn}
                 loggedIn={loggedIn}
                 nameUser={userData}
                 setPopapInfoTooltip={setPopapInfoTooltip}
                 setMessage={setMessage}
+                setRenderMovi={setRenderMovi}
               />
             }
           />
@@ -244,6 +255,7 @@ function App() {
                 isLoading={isLoading}
                 addMovies={handleAddMovies}
                 deleteMovie={handleDeleteMovie}
+                renderMovi={renderMovi}
               />
             }
           />

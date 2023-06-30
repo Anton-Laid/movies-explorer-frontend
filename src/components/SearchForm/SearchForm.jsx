@@ -51,7 +51,6 @@ const SearchForm = ({ handleSearch, defaultValue }) => {
         </button>
 
         <div className="search-form__line" />
-
         <FilterCheckbox handleChange={handleChangeCheckbox} />
       </form>
     </div>

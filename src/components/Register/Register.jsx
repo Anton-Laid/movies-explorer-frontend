@@ -2,15 +2,11 @@ import Logo from '../Logo/Logo';
 import './Register.css';
 import { useFormAndValidation } from '../../hooks/validation';
 import * as auth from '../../utils/Auth';
-import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { validateEmail, validateName } from '../../utils/validation';
 
-const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
+const Register = ({ onLogin, infoMes }) => {
   const { values, errors, isValid, handleChange } = useFormAndValidation();
-  const navigate = useNavigate();
-  const [infoMes, setInfoMes] = useState('');
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -21,19 +17,11 @@ const Register = ({ setPopapInfoTooltip, setMessage, setLoggedIn }) => {
     auth
       .register(values)
       .then((res) => {
-        navigate('/signin', { replace: true });
-        setPopapInfoTooltip(true);
-        setMessage({
-          imgPath: true,
-          text: 'Вы успешно зарегистрировались',
-        });
-      })
-      .catch((err) => {
-        if (err.status === 409) {
-          setInfoMes('Этот пользователь уже зарегистрирован');
+        if (res) {
+          onLogin(values);
         }
-        console.log(err);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

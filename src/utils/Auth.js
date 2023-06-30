@@ -45,3 +45,13 @@ export const getContent = () => {
     },
   }).then(handelResponse);
 };
+
+// export const signOut = () => {
+//   return fetch(`${MAIN_URL}/signout`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+//     },
+//   }).then(handelResponse);
+// };

@@ -6,7 +6,7 @@ const MoviesCard = ({ movie, deleteMovie, addMovies }) => {
   let location = useLocation();
   const isLikedButton = location.pathname === '/movies';
   const isDeleteBtn = location.pathname === '/saved-movies';
-  const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+  const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
   const isLiked = savedMovies.some((i) => {
     return i.nameRU === movie.nameRU;
   });

@@ -1,7 +1,7 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-const MoviesCardList = ({ movi, addMovies, deleteMovie }) => {
+const MoviesCardList = ({ movi, addMovies, deleteMovie, test }) => {
   return (
     <section className="movies-card-list">
       <div className="movies-card-list__container">
